@@ -1,7 +1,9 @@
 // modules requirement
 const express = require('express');
 const app = express();
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const fileupload = require(`express-fileupload`);
+const path = require(`path`)
 
 // using dotenv
 dotenv.config({path: `./config/config.env`});
@@ -10,16 +12,21 @@ dotenv.config({path: `./config/config.env`});
 const connect = require(`./config/db`);
 connect();
 
+// send image to front
+app.use(`/public`, express.static(path.join(__dirname, 'public')))
+
 // read req.body
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
+// using exprss-fileupload
+app.use(fileupload());
 
 // CORS security
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Method', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Athurization');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next()
 });
 

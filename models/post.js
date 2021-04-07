@@ -13,6 +13,10 @@ const postSchema = new mongoose.Schema({
             minLength: 5,
             required: true
         },
+        imageUrl: {
+            type: String,
+            required: true
+        },
         creator: {
             type: {
                 name: {

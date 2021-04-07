@@ -2,8 +2,8 @@
 const Handler = require(`../utils/error`);
 
 const errorHandler = (err, req, res, next) => {
-    let error;
-
+    let error = {...err};
+    
     if (err.name === 'ValidationError') {
         error = new Handler(400, err.message)
     }
