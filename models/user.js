@@ -3,6 +3,10 @@ const mongoose = require(`mongoose`);
 
 // create user schema
 const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         trim: true,
@@ -19,10 +23,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
-    }]
+    posts: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post'
+        }]
+    }
 });
 
 module.exports = mongoose.model('User', userSchema);
