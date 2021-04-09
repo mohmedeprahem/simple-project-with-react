@@ -50,7 +50,7 @@ class Feed extends Component {
       page--;
       this.setState({ postPage: page });
     }
-    fetch('http://localhost:5000/api/posts?page=' + page, {
+    fetch(`http://${process.env.React_App_DOMAIN}/api/posts?page=` + page, {
       headers: {
         Authorization: 'Bearer ' + this.props.token
       }
@@ -118,10 +118,10 @@ class Feed extends Component {
     formData.append('title', postData.title);
     formData.append('content', postData.content);
     formData.append('image', postData.image);
-    let url = 'http://localhost:5000/api/add-post';
+    let url = `http://${process.env.React_App_DOMAIN}/api/add-post`;
     let method = 'POST';
     if (this.state.editPost) {
-      url = 'http://localhost:5000/api/post/' + this.state.editPost._id;
+      url = `http://${process.env.React_App_DOMAIN}/api/post/` + this.state.editPost._id;
       method = 'PUT';
     }
 
@@ -182,7 +182,7 @@ class Feed extends Component {
 
   deletePostHandler = postId => {
     this.setState({ postsLoading: true });
-    fetch('http://localhost:5000/api/post/' + postId, {
+    fetch(`http://${process.env.React_App_DOMAIN}/api/post/${postId}`, {
       method: 'DELETE',
       headers: {
         Authorization: 'Bearer ' + this.props.token

@@ -8,6 +8,14 @@ const path = require(`path`)
 // using dotenv
 dotenv.config({path: `./config/config.env`});
 
+// check env of app
+if (process.env.NODE_ENV === 'production') {
+
+   app.get('*', (req, res) => {
+       res.sendFile(__dirname, 'client', 'build', 'index.html');
+   });
+}
+
 // connect to mongodb
 const connect = require(`./config/db`);
 connect();
