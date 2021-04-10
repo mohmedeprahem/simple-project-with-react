@@ -60,7 +60,7 @@ class App extends Component {
     event.preventDefault();
     this.setState({ authLoading: true });
     console.log(process.env)
-    fetch(`http://${process.env.React_App_DOMAIN}/api/login`, {
+    fetch(`https://${process.env.React_App_DOMAIN}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ class App extends Component {
   signupHandler = (event, authData) => {
     event.preventDefault();
     this.setState({ authLoading: true });
-    fetch(`http://${process.env.React_App_DOMAIN}/api/signup`, {
+    fetch(`https://${process.env.React_App_DOMAIN}/api/signup`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
