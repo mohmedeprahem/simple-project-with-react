@@ -15,7 +15,7 @@ const Handler = require(`../utils/error`);
 exports.addPost = async (req, res, next) => {
     try {
         let result;
-
+        console.log(1)
         // check if user upload image
         if (!req.files) {
             console.log(2)
@@ -28,22 +28,22 @@ exports.addPost = async (req, res, next) => {
         if (!file.mimetype.startsWith('image')) {
             return next(new Handler(400, `upload image`))
         }
-
+        console.log(3)
         // check file size
         if (file.size > process.env.MAX_FILE_SIZE) {
             return next(new Handler(400, `upload an image less than ${process.env.MAX_FILE_SIZE}`))
         }
-
+        console.log(4)
         // create custom file
         file.name = `photo_${Date.now()}${path.parse(file.name).ext}`;
         
         file.mv(`${process.env.FILE_UPLOAD_PATH}${file.name}`, async err => {
 
             if (err) {
-                console.log(1)
+                console.log(5)
                 return next(500, `problem with file upload`)
             }
-
+            console.log(6)
             // save new post in db
             req.body.imageUrl = file.name;
             result = await postSchema.create({
@@ -55,14 +55,15 @@ exports.addPost = async (req, res, next) => {
                     name: req.user.name
                 },
             })
-
+            console.log(7)
             let user = await userSchema.findById(req.user.id);
-            
+            console.log(8)
             if (!user) return next(new Handler(401, `unauth`));
-
+            console.log(9)
             user.posts.push(result._id);
+            console.log(10)
             await user.save();
-
+            console.log(11)
             // send response
             res.status(201).json({
                 message: 'post created successfully',
