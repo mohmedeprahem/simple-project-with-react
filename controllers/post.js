@@ -37,7 +37,7 @@ exports.addPost = async (req, res, next) => {
         // create custom file
         file.name = `photo_${Date.now()}${path.parse(file.name).ext}`;
         
-        file.mv(`${__dirname}/${process.env.FILE_UPLOAD_PATH}${file.name}`, async err => {
+        file.mv(`${process.env.FILE_UPLOAD_PATH}${file.name}`, async err => {
 
             if (err) {
                 console.log(err)

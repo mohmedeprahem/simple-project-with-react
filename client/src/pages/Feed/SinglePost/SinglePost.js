@@ -14,7 +14,7 @@ class SinglePost extends Component {
 
   componentDidMount() {
     const postId = this.props.match.params.postId;
-    fetch(`https://${process.env.React_App_DOMAIN}/api/post/` + postId, {
+    fetch(`${process.env.REACT_APP_DOMAIN}/api/post/` + postId, {
       headers: {
         Authorization: 'Bearer ' + this.props.token
       }
@@ -29,7 +29,7 @@ class SinglePost extends Component {
         this.setState({
           title: resData.post.title,
           author: resData.post.creator.name,
-          image: `https://${process.env.React_App_DOMAIN}/public/img/` + resData.post.imageUrl,
+          image: `${process.env.REACT_APP_DOMAIN}/public/img/` + resData.post.imageUrl,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
           content: resData.post.content
         });
