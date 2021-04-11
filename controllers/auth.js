@@ -13,6 +13,7 @@ const Handler = require(`../utils/error`);
 // @access: public
 exports.signUp = async (req, res, next) => {
     try {
+        console.log(req.body)
         // validation password
         if (req.body.password.length < 8) {
             return next(400, `invalid password`)
