@@ -12,7 +12,7 @@ dotenv.config({path: `./config/config.env`});
 if (process.env.NODE_ENV === 'production') {
 
    app.get('*', (req, res) => {
-       res.sendFile(__dirname, 'client', 'build', 'index.html');
+       app.use(express.static(`client/build`));
    });
 }
 
