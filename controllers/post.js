@@ -40,6 +40,7 @@ exports.addPost = async (req, res, next) => {
         file.mv(`${process.env.FILE_UPLOAD_PATH}${file.name}`, async err => {
 
             if (err) {
+                console.log(1)
                 return next(500, `problem with file upload`)
             }
 
