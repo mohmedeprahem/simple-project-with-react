@@ -54,13 +54,9 @@ exports.login = async (req, res, next) => {
     if (!result) return next(new Handler(422, `invaled data1`));
         console.log(2)
     // check password
-    bcrypt.compare(req.body.password, result.password, (err, result) => {
-        if (err) return next(err);
-        console.log(result)
-        if (!result) return next(new Handler(422, `invaled data2`));
-        console.log(1)
-    });
+    const checkPassword = await bcrypt.compare(req.body.password, result.password);
 
+    if (!checkPassword) return next(new Handler(422, `invaled data2`));
     // create jwt
     const token = jwt.sign(
         { 
