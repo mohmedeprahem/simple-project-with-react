@@ -52,13 +52,13 @@ exports.login = async (req, res, next) => {
     const result = await userSchema.findOne({email: req.body.email});
 
     if (!result) return next(new Handler(422, `invaled data1`));
-    
+        console.log(2)
     // check password
     bcrypt.compare(req.body.password, result.password, (err, result) => {
         if (err) return next(err);
         console.log(result)
         if (!result) return next(new Handler(422, `invaled data2`));
-        console.log(result)
+        console.log(1)
     });
 
     // create jwt
