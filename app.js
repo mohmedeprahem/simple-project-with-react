@@ -11,7 +11,7 @@ dotenv.config({path: `./config/config.env`});
 // check env of app
 if (process.env.NODE_ENV === 'production') {
 
-   app.get('*', app.use(express.static(`client/build`)));
+   app.use(express.static(`client/build`));
 }
 
 // connect to mongodb
